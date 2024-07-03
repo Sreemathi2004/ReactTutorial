@@ -1,0 +1,648 @@
+->React is a javascript library for building UI
+->Developed by facebook 2011
+-> Use components Model
+->Build Modular Apps
+->Learn Once , write Anywhere
+
+React is the most popular ,powerful front-end Developed and sponserd by facebook
+
+components Model:-
+-----------------
+
+      A component is a piece of the UI that
+      has its own logic and appearance .
+
+      A component can be as small as a button or as large as an entire page.
+
+
+Learn Once write anywhere, -> we can also use anywhere 
+
+
+//**********************
+Traditional way of components using class
+
+import React from "react";
+
+class Apple extends React.Component{
+    render(){
+        return(
+            <h1>Iam apple!!</h1>
+        )
+    }
+}
+
+export default Apple;
+
+**************PROPS***************
+//single props 
+--------------
+
+car.jsx
+
+import React from 'react'
+import Rolls from './Rolls';
+
+function Car(props) {
+    const { brands }=props;
+    console.log(brands);
+    const text=`This my ${brands} car`;
+  return <h1>{`${text}`}</h1>
+}
+
+export default Car;
+//-------------
+Rolls.jsx
+
+import React from 'react'
+import Car from './Car';
+
+function Rolls() {
+  const brand="sree";
+  console.log(brand);
+return <Car brands={brand} />
+}
+
+export default Rolls;
+
+//------------
+
+App.jsx
+
+import Rolls from './assets/Components/Rolls'
+
+
+
+function App(){
+  return <Rolls/>
+
+}
+
+export default App;
+
+
+//**************
+double props
+-------------
+
+import React from 'react'
+import Car from './Car';
+
+function Rolls() {
+  const brand="sree";
+  console.log(brand);
+return <Car brands={brand} color={'black'} />
+}
+
+export default Rolls;
+
+
+import React from 'react'
+import Rolls from './Rolls';
+
+function Car(props) {
+    const { brands,color }=props;
+    console.log(brands);
+    const text=`This my ${brands} car and color is ${color}`;
+  return <h1>{`${text}`}</h1>
+}
+
+export default Car;
+
+//*****************
+props uh object uh kudukalam
+
+Rolls.jsx:-
+-------------
+
+import React from 'react'
+import Car from './Car';
+
+function Rolls() {
+  const carInfo={
+    brands:"Rolls Royce",
+    color:"Black"
+  };
+return <Car carInfo={carInfo} />
+}
+
+export default Rolls;
+
+
+
+Car.jsx:-
+-----------
+import React from 'react'
+import Rolls from './Rolls';
+
+function Car(props) {
+   const {carInfo}=props;
+   const {brands,color}=carInfo;
+    const text=`This my ${brands} car and color is ${color}`;
+  return <h1>{`${text}`}</h1>
+}
+
+export default Car;
+
+
+//*******PROPS IN CLASS COMPONENT**********//
+
+Rolls.jsx
+-----------
+import React from 'react'
+import Apple from './Apple';
+
+function Rolls() {
+  const appleInfo={
+    color:"Red",
+    price:"$34.5",
+    weight:"2gram"
+  };
+return <Apple appleInfo={appleInfo}/>
+}
+
+export default Rolls;
+
+
+Apple.jsx
+-----------
+import React from "react";
+
+class Apple extends React.Component{
+    render(){
+        const {appleInfo}=this.props;
+        const {color,price,weight}=appleInfo;
+        const text=`This is apple is ${color} in color and price arround  ${price} and ${weight} `;
+
+        return <h1>{text}</h1>
+    }
+}
+
+export default Apple;
+
+
+//**********REACT DEVELOPER TOOLS BROWSER EXTENSION***********//
+
+  ==>react devtools
+
+
+//******Conditional Rendering******//
+
+Rolls.jsx:-
+------------
+
+import React from 'react'
+import Apple from './Apple';
+
+function Rolls() {
+  const appleInfo={
+    color:"red",
+    price:"12 rup",
+    weight:"12gram"
+  };
+return (
+  <>
+  <h1>Hello</h1>
+  {appleInfo.color!==undefined && appleInfo.price!==undefined && appleInfo.weight!==undefined ? <Apple appleInfo={appleInfo}/>: null }
+  </>
+)
+}
+
+export default Rolls;
+
+Apple.jsx:-
+--------------
+
+import React from "react";
+
+class Apple extends React.Component{
+    render(){
+        const {appleInfo}=this.props;
+        const {color,price,weight}=appleInfo;
+        const text=`This is apple is ${color} in color and price arround  ${price} and ${weight} `;
+
+        return <h1>{text}</h1>
+    }
+}
+
+export default Apple;
+
+//***************************
+
+import React from 'react'
+import Apple from './Apple';
+
+function Rolls() {
+  const appleInfo={
+    color:"red",
+    price:"12 rup",
+    weight:"12gram"
+  };
+  const isDoorOpened=true;
+  const checkHere=(appleInfo.color!==undefined && appleInfo.price!==undefined && appleInfo.weight!==undefined);
+return (
+  <>
+  <h1>Hello</h1>
+  {checkHere? <Apple appleInfo={appleInfo}/>: null }
+
+  {isDoorOpened?<h2>Garage door is opened </h2>:<h2>Garage door is closed</h2>}
+  </>
+)
+}
+
+export default Rolls;
+
+//*****************************
+instead of ternary we can use and operator:-
+--------------------------------------------
+
+function Rolls() {
+  const appleInfo={
+    color:"red",
+    price:"12 rup",
+    weight:"12gram"
+  };
+  const isDoorOpened=true;
+  const checkHere=(appleInfo.color!==undefined && appleInfo.price!==undefined && appleInfo.weight!==undefined);
+return (
+  <>
+  <h1>Hello</h1>
+  {checkHere && <Apple appleInfo={appleInfo}/>}
+
+  {isDoorOpened?<h2>Garage door is opened </h2>:<h2>Garage door is closed</h2>}
+  </>
+)
+}
+
+//*******LIST***********//
+
+Rolls.jsx:-
+----------
+
+import React from 'react'
+import Apple from './Apple';
+import Car from './Car';
+
+function Rolls() {
+  const carInfo={brand:"Ferrari",color:"Black"};
+  const carList=[
+    {brand:"BMW",color:"red"},
+    {brand:"Ford",color:"Green"},
+    {brand:"Rolls",color:"Black"}
+  ]
+ 
+return(
+  <>
+  <h1>Hello</h1>
+  <ul>
+    {carList.map((carInfo)=> <li><Car carInfo={carInfo} /></li>)}
+  </ul>
+  </>
+
+)
+
+
+}
+
+export default Rolls;
+
+
+Car.jsx:-
+-----------
+
+import React from 'react'
+
+function Car(props) {
+   const {carInfo}=props;
+   const {brand,color}=carInfo;
+    const text=`This my ${brand} car and color is ${color}`;
+  return <h1>{`${text}`}</h1>
+}
+
+export default Car;
+
+//********************LIST KEYS**********************//
+
+react_jsx-dev-runtime.js?v=75b7e944:62 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of `Rolls`. See https://reactjs.org/link/warning-keys for more information.
+    at li
+    at Rolls
+    at App
+
+pona list la namaku enna nenaipom na seri thani thani list la store agiruku nu but athu apdi illa oree list tha irukum ethunala future project la problem varum  so we need to key for this list
+
+//Rolls.jsx:-
+----------------
+
+return(
+  <>
+  <h1>Hello</h1>
+  <ul>
+    {carList.map((carInfo)=> <li key={carInfo.brand}><Car carInfo={carInfo} /></li>)}
+  </ul>
+  </>
+
+)
+
+but entha key html la display agathu ethu react ku mattum tha thevai
+
+Incase inga key and value nala ethu repeat agaliyoo atha kudukarom incase oru vela array mari irutha arr=[1,2,3,4,5] ethuku epdi key kudukarathu?
+
+const arr=[1,2,3,4,5,6];
+ 
+return(
+  <>
+  <h1>Hello</h1>
+  <ul>
+    {carList.map((carInfo)=> <li key={carInfo.brand}><Car carInfo={carInfo} /></li>)}
+  </ul>
+
+  <ul>
+    {arr.map((element,index)=><p key={index}>{element}</p>)}
+  </ul>
+  </>
+
+)
+
+///**************CSS*************//
+
+import React from 'react'
+
+function Header() {
+  return (
+    <>
+    <h1 style={{color:"red",backgroundColor:"black"}}>Hello Styling</h1>
+    <p>Add a little style</p>
+    </>
+  )
+}
+
+export default Header;
+
+------------------------------------
+
+//method 2
+
+import React from 'react'
+
+function Header() {
+    const mystyle={
+        color:"red",
+        backgroundColor:"black"
+    };
+  return (
+    <h1 style={mystyle}>Hello</h1>
+  )
+}
+
+export default Header;
+
+-------------------------------------
+
+import React from 'react'
+
+function Header() {
+    const mystyle={
+        color:"red",
+        backgroundColor:"black",
+        padding : "10px",
+        fontFamily :"cursive"
+    };
+  return (
+    <h1 style={mystyle}>Hello</h1>
+  )
+}
+
+export default Header;
+
+
+
+//********************CSS STYLESHEET***********************//
+
+import React from 'react'
+import './Header.css'
+
+function Header() {
+    
+  return (
+    <h1 >Hello</h1>
+  )
+}
+
+export default Header;
+
+
+HEADER.css
+----------------
+body{
+    background-color: black;
+    color: blanchedalmond;
+    font-family: cursive;
+    font-size: larger;
+}
+
+-------
+import React from 'react'
+import './Header.css'
+
+function Header() {
+    
+  return (
+    <>
+    <h1 >Hello</h1>
+    <p className='classes'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio, rerum?</p>
+    </>
+
+  )
+}
+
+export default Header;
+
+//********* Creating STATE in function component*************//
+
+
+import React, { useState } from 'react'
+
+function FavoriteColor() {
+const [color,setColor]=useState('Blue');
+return<>
+    <h1>My favorite color is {color}</h1>
+    <button onClick={()=> {setColor("Red")}}>Change color</button>
+</>
+}
+
+export default FavoriteColor;
+
+
+//***********creating state in class components****************//
+
+
+import React from "react";
+class FavoriteColor extends React.Component{
+    constructor(){
+        super();
+        this.state={color:'red'}
+    }
+    render(){
+        return<>
+            <h1>My car color is {this.state.color}</h1>
+            <button onClick={()=>this.setState({color:'blue'})}>click here</button>
+        </>
+    }
+}
+export default FavoriteColor;
+
+//*********MULTIPLE STATE IN HOOKS******************//
+
+import { useState } from "react";
+
+function FavoriteColor(){
+    const [color,setColor]=useState("Red");
+    const [brand,setBrand]=useState("Fasino");
+    const [year,setYear]=useState("2020");
+    return <>
+    <h1>My scooter</h1>
+    <p>Color : {color}</p>
+    <p>Brand : {brand}</p>
+    <p>Year : {year}</p>
+    </>
+}
+
+export default FavoriteColor;
+
+//*******STATE WITH OBJECT***********//
+
+import { useState } from "react";
+
+function FavoriteColor(){
+    // const [color,setColor]=useState("Red");
+    // const [brand,setBrand]=useState("Fasino");
+    // const [year,setYear]=useState("2020");
+
+    const [scooter,setScooter]=useState({
+        color:"Red",
+        brand : "Honda",
+        year:"2020"
+    })
+    return <>
+    <h1>My scooter</h1>
+    <p>Color : {scooter.color}</p>
+    <p>Brand : {scooter.brand}</p>
+    <p>Year : {scooter.year}</p>
+    </>
+}
+
+export default FavoriteColor;
+
+
+//**********UPDATING OBJECT IN STATE*************//
+
+if nama suppose color uh mattum change pannumum nu nenaicha 
+
+function FavoriteColor(){
+    // const [color,setColor]=useState("Red");
+    // const [brand,setBrand]=useState("Fasino");
+    // const [year,setYear]=useState("2020");
+
+
+    function changeColor(){
+        setScooter({color:"Blue"})
+    }
+    const [scooter,setScooter]=useState({
+        color:"Red",
+        brand : "Honda",
+        year:"2020"
+    })
+    return <>
+    <h1>My scooter</h1>
+    <p>Color : {scooter.color}</p>
+    <p>Brand : {scooter.brand}</p>
+    <p>Year : {scooter.year}</p>
+    <button onClick={changeColor}>change color</button>
+    </>
+}
+
+if we do like this it just update blue and other problem is it erase other properties values
+
+so we need to update value carefully:-
+
+
+function FavoriteColor(){
+    // const [color,setColor]=useState("Red");
+    // const [brand,setBrand]=useState("Fasino");
+    // const [year,setYear]=useState("2020");
+
+
+    
+    const [scooter,setScooter]=useState({
+        color:"Red",
+        brand : "Honda",
+        year:"2020"
+    })
+    function changeColor(){
+        setScooter(previousProperty=>
+            {
+                return {
+                    ...previousProperty,color:"Blue"
+                };
+            }
+        )
+    }
+    return <>
+    <h1>My scooter</h1>
+    <p>Color : {scooter.color}</p>
+    <p>Brand : {scooter.brand}</p>
+    <p>Year : {scooter.year}</p>
+    <button onClick={changeColor}>change color</button>
+    </>
+}
+
+first previousProperty uh reference uh eduthakanum apm tha update pannunam
+
+//************UPDATING OBJECT IN CLASS COMPONENT***************//
+
+class FavoriteColor extends React.Component{
+    constructor(){
+        super();
+        this.state={color:"red",model:"ford"}
+    }
+    render(){
+        return<>
+        <h1>My car color is {this.state.color} and model is {this.state.model}</h1>
+        <button onClick={(previousProperty)=> {this.setState({...previousProperty,model:"Fasicno"})}}>change color</button>
+        </>
+    }
+}
+export default FavoriteColor;
+
+//************************UPDATING ARRAYS IN STATE*******************//
+
+import React, { useState } from 'react'
+
+function FavoriteColor() {
+       const [list,setList]=useState([]);
+       const [count,setCount]=useState(1);
+
+       function addItem(){
+        const itemName='Item'+count;
+        setList((previousList)=>[...previousList,itemName])
+        setCount((previouscount)=>previouscount+1);
+       }
+    
+       return (
+
+        <>
+            <button onClick={addItem}>addItems</button>
+            <ul>
+                {
+                    list.map((el,index)=> <li key={index}>{el}</li>)
+                }
+            </ul>
+        </>
+       )
+       
+}
+
+export default FavoriteColor;
+
+
